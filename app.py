@@ -4,7 +4,7 @@ from random import randint
 import dash
 import flask
 
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State, Event
 import dash_core_components as dcc
 import dash_html_components as html
 
@@ -49,7 +49,7 @@ app.layout = html.Div([
 
     html.Div([   # Holds the map & the widgets
         html.Div([  # Holds the map
-            dcc.dcc.Graph(id="map")
+            dcc.Graph(id="map")
         ],
         style={
             "width" : '38%', 
