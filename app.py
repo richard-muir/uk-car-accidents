@@ -181,6 +181,8 @@ app.layout = Div([
     ]
 )
 def updateBarChart(severity, weekdays, time):
+    print(severity)
+
     hours = [i for i in range(time[0], time[1]+1)]
     
     acc2 = DataFrame(acc[[
