@@ -1,4 +1,9 @@
-from dash import Dash
+import os
+from random import randint
+
+import dash
+import flask
+
 from dash.dependencies import Input, Output
 from dash_core_components import Graph, Checklist, RangeSlider
 from dash_html_components import Div, H1, H3
@@ -24,7 +29,12 @@ acc = read_csv('https://raw.githubusercontent.com/richard-muir/uk-car-accidents/
 acc['Hour'] = acc['Time'].apply(lambda x: int(x[:2]))
 
 
-app = Dash()
+
+server = flask.Flask(__name__)
+server.secret_key = os.environ.get('secret_key', str(randint(0, 1000000)))
+app = dash.Dash(__name__, server=server)
+
+
 #app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
 
 app.layout = Div([
@@ -378,5 +388,9 @@ def updateMapBox(severity, weekdays, time):
 
 
 
+
+# Run the Dash app
 if __name__ == '__main__':
-    app.run_server()
+    app.server.run(debug=True, threaded=True)
+
+
