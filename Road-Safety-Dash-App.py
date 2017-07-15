@@ -20,7 +20,7 @@ RIGHTBOX_CSS = {}
 
 
 
-acc = read_csv('accidents2015_V.csv', index_col = 0).dropna(how='any', axis = 0)
+acc = read_csv('http://www.richard-muir.com/data/public/csv/accidents2015_V.csv', index_col = 0).dropna(how='any', axis = 0)
 acc['Hour'] = acc['Time'].apply(lambda x: int(x[:2]))
 
 
