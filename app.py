@@ -5,8 +5,8 @@ import dash
 import flask
 
 from dash.dependencies import Input, Output
-from dash_core_components import Graph, Checklist, RangeSlider
-from dash_html_components import Div, H1, H3
+import dash_core_components as dcc
+import dash_html_components as html
 
 from pandas import read_csv, DataFrame
 
@@ -37,19 +37,19 @@ app = dash.Dash(__name__, server=server)
 
 #app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
 
-app.layout = Div([
-    H1(
+app.layout = html.Div([
+    html.H1(
         'Traffic Accidents in the UK',
         style={
             'paddingLeft' : 50,
             'fontFamily' : FONT_FAMILY
             }
         ),
-    #Div(id="my-div"),
+    #html.Div(id="my-html.Div"),
 
-    Div([   # Holds the map & the widgets
-        Div([  # Holds the map
-            Graph(id="map")
+    html.Div([   # Holds the map & the widgets
+        html.Div([  # Holds the map
+            dcc.dcc.Graph(id="map")
         ],
         style={
             "width" : '38%', 
@@ -59,26 +59,26 @@ app.layout = Div([
             'boxSizing' : 
             'border-box'}
         ),
-        Div([  # Holds the widgets & Descriptions
-            H3(
+        html.Div([  # Holds the widgets & Descriptions
+            html.H3(
                 '''In 2015, the UK suffered {:,} traffic accidents, many of them fatal.'''.format(len(acc)),
                 style={
                     'fontFamily' : FONT_FAMILY
                 }
                 ),
-            Div(
+            html.Div(
                 '''You can explore when and where the accidents happened using these filters.''',
                 style={
                     }
                 ),
-            Div(
+            html.Div(
                 '''Select the severity of the accident:''',
                 style={
                     'paddingTop' : 20,
                     'paddingBottom' : 10
                 }
             ),
-            Checklist(
+            dcc.Checklist(
                 options=[
                     {'label': sev, 'value': sev} for sev in acc['Accident_Severity'].unique()
                 ],
@@ -92,14 +92,14 @@ app.layout = Div([
                 id="severityChecklist",
                 
             ),
-            Div(
+            html.Div(
                 '''Select the day of the accident:''',
                 style={
                     'paddingTop' : 20,
                     'paddingBottom' : 10
                 }
             ),
-            Checklist(
+            dcc.Checklist(
                 options=[
                     {'label': day[:3], 'value': day} for day in sorted(acc['Day_of_Week'].unique(), key=lambda k: DAYSORT[k])
                 ],
@@ -112,14 +112,14 @@ app.layout = Div([
                     },
                 id="dayChecklist",
             ),
-            Div(
+            html.Div(
                 '''Select the hours in which the accident occurred (24h clock):''',
                 style={
                     'paddingTop' : 20,
                     'paddingBottom' : 10
                 }
             ),
-            RangeSlider(
+            dcc.RangeSlider(
                 id="hourSlider",
                 count=1,
                 min=-acc['Hour'].min(),
@@ -142,9 +142,9 @@ app.layout = Div([
     ],
     style={'paddingBottom' : 10}),
 
-    Div([  # Holds the heatmap & barchart (60:40 split) 
-        Div([  # Holds the heatmap
-            Graph(id="heatmap",
+    html.Div([  # Holds the heatmap & barchart (60:40 split) 
+        html.Div([  # Holds the heatmap
+            dcc.Graph(id="heatmap",
             style={'height' : '50%'})
         ],
         style={
@@ -157,8 +157,8 @@ app.layout = Div([
             }
         ),
 
-        Div([  # Holds the barchart
-            Graph(id="bar",
+        html.Div([  # Holds the barchart
+            dcc.Graph(id="bar",
             style={'height' : '50%'})
         ],
         style={
