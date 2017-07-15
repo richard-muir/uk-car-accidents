@@ -1,1 +1,1 @@
-web: gunicorn app:server --timeout 300
+web: gunicorn traffic-accidents-uk:server --timeout 300
