@@ -31,8 +31,9 @@ acc['Hour'] = acc['Time'].apply(lambda x: int(x[:2]))
 
 
 server = flask.Flask(__name__)
-server.secret_key = os.environ.get('secret_key', str(randint(0, 1000000)))
+server.secret_key = os.environ.get('secret_key', 'secret')
 app = dash.Dash(__name__, server=server)
+app.config.supress_callback_exceptions = True
 
 
 #app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"})
