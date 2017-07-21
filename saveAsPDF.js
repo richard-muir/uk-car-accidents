@@ -1,1 +1,1 @@
-setTimeout(10000, window.print())
+setTimeout(100000, window.print())
