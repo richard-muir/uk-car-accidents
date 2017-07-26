@@ -1,1 +1,2 @@
-setTimeout(100000, window.print())
+console.log('Download PDF')
+window.print()
