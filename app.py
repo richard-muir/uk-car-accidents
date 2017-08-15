@@ -255,11 +255,12 @@ def updateBarChart(severity, weekdays, time):
             'line' : {'width' : 2,
                       'color' : '#333'}},
             'name' : sev,
-        })
+        })  
         
     fig = {'data' : traces,
           'layout' : {
               'paper_bgcolor' : 'rgb(26,25,25)',
+              'plot_bgcolor' : 'rgb(26,25,25)',
               'font' : {
                   'color' : 'rgb(250,250,250'
               },
