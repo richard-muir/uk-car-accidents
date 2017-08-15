@@ -51,8 +51,8 @@ app = dash.Dash(__name__, server=server)
 app.config.supress_callback_exceptions = True
 
 # Include the external CSS
-cssURL = "https://raw.githubusercontent.com/richard-muir/uk-car-accidents/master/road-safety.css"
-app.scripts.append_script({
+cssURL = "https://rawgit.com/richard-muir/uk-car-accidents/master/road-safety.css"
+app.css.append_css({
     "external_url": cssURL
 })
 
