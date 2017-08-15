@@ -33,9 +33,6 @@ DAYSORT = dict(zip(['Friday', 'Monday', 'Saturday','Sunday', 'Thursday', 'Tuesda
 # Set the global font family
 FONT_FAMILY =  "Arial"
 
-# Set the CSS for right-floating elements
-RIGHTBOX_CSS = {}
-
 
 # Read in data from csv stored on github
 acc = read_csv('https://raw.githubusercontent.com/richard-muir/uk-car-accidents/master/accidents2015_V.csv', 
@@ -204,7 +201,10 @@ app.layout = html.Div([
             })
 
     ])
-])
+],
+style={
+    'background' : '#333'
+})
 
 ## APP INTERACTIVITY THROUGH CALLBACK FUNCTIONS TO UPDATE THE CHARTS ##
 
