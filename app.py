@@ -31,7 +31,7 @@ DAYSORT = dict(zip(['Friday', 'Monday', 'Saturday','Sunday', 'Thursday', 'Tuesda
                   [4, 0, 5, 6, 3, 1, 2]))
 
 # Set the global font family
-FONT_FAMILY =  "Arial"
+FONT_FAMILY =  "Arial" 
 
 
 # Read in data from csv stored on github
@@ -259,6 +259,10 @@ def updateBarChart(severity, weekdays, time):
         
     fig = {'data' : traces,
           'layout' : {
+              'paper_bgcolor' : 'rgb(26,25,25)',
+              'font' : {
+                  'color' : 'rgb(250,250,250'
+              },
               'height' : 300,
               'title' : 'Accidents by speed limit',
               'margin' : { # Set margins to allow maximum space for the chart
@@ -344,6 +348,10 @@ def updateHeatmap(severity, weekdays, time):
         
     fig = {'data' : traces,
           'layout' : {
+              'paper_bgcolor' : 'rgb(26,25,25)',
+              'font' : {
+                  'color' : 'rgb(250,250,250'
+              },
               'height' : 300,
               'title' : 'Accidents by time and day',
               'margin' : {
@@ -424,7 +432,10 @@ def updateMapBox(severity, weekdays, time):
         })
     layout = {
         'height' : 300,
-        'paper_bgcolor' : 'rgb(26,25,25)', # Set this to match the colour of the sea in the mapbox colourscheme
+        'paper_bgcolor' : 'rgb(26,25,25)',
+              'font' : {
+                  'color' : 'rgb(250,250,250'
+              }, # Set this to match the colour of the sea in the mapbox colourscheme
         'autosize' : True,
         'hovermode' : 'closest',
         'mapbox' : {
