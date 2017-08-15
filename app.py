@@ -50,6 +50,12 @@ server.secret_key = os.environ.get('secret_key', 'secret')
 app = dash.Dash(__name__, server=server)
 app.config.supress_callback_exceptions = True
 
+# Include the external CSS
+cssURL = "https://raw.githubusercontent.com/richard-muir/uk-car-accidents/master/road-safety.css"
+app.scripts.append_script({
+    "external_url": cssURL
+})
+
 ## SETTING UP THE APP LAYOUT ##
 
 # Main layout container
@@ -201,10 +207,7 @@ app.layout = html.Div([
             })
 
     ])
-],
-style={
-    'background' : '#333'
-})
+])
 
 ## APP INTERACTIVITY THROUGH CALLBACK FUNCTIONS TO UPDATE THE CHARTS ##
 
