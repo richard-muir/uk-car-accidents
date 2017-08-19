@@ -35,8 +35,9 @@ FONT_FAMILY =  "Arial"
 
 
 # Read in data from csv stored on github
-acc = read_csv('https://raw.githubusercontent.com/richard-muir/uk-car-accidents/master/accidents2015_V.csv', 
-            index_col = 0).dropna(how='any', axis = 0)
+#csvLoc = 'accidents2015_V.csv'  
+csvLoc = 'https://raw.githubusercontent.com/richard-muir/uk-car-accidents/master/accidents2015_V.csv'
+acc = read_csv(csvLoc, index_col = 0).dropna(how='any', axis = 0)
 # Remove observations where speed limit is 0 or 10. There's only three and it adds a lot of 
 #  complexity to the bar chart for no material benefit
 acc = acc[~acc['Speed_limit'].isin([0, 10])]
@@ -67,19 +68,10 @@ app.layout = html.Div([
             'fontFamily' : FONT_FAMILY
             }
         ),
-    html.Div([   # Holds the map & the widgets
+    html.Div([   # Holds the widgets & Descriptions
+
         html.Div([  
-            dcc.Graph(id="map") # Holds the map in a div to apply styling to it
-        ],
-        style={
-            "width" : '38%', 
-            'display' : 'inline-block', 
-            'paddingLeft' : 50, 
-            'paddingRight' : 10,
-            'boxSizing' : 
-            'border-box'}
-        ),
-        html.Div([  # Holds the widgets & Descriptions
+
             html.H3(
                 '''In 2015, the UK suffered {:,} traffic accidents, many of them fatal.'''.format(len(acc)),
                 style={
@@ -146,9 +138,26 @@ app.layout = html.Div([
                 value=[acc['Hour'].min(), acc['Hour'].max()],
                 marks={str(h) : str(h) for h in range(acc['Hour'].min(), acc['Hour'].max() + 1)}
             )
+            
+            
+
         ],
         style={
-            "width" : '58%', 
+            "width" : '60%', 
+            'display' : 'inline-block', 
+            'paddingLeft' : 50, 
+            'paddingRight' : 10,
+            'boxSizing' : 'border-box',
+            }
+        ),
+        
+        html.Div([  # Holds the map & the widgets
+
+            dcc.Graph(id="map") # Holds the map in a div to apply styling to it
+            
+        ],
+        style={
+            "width" : '40%', 
             'float' : 'right', 
             'display' : 'inline-block', 
             'paddingRight' : 50, 
@@ -158,29 +167,13 @@ app.layout = html.Div([
             })
 
     ],
-    style={'paddingBottom' : 10}),
+    style={'paddingBottom' : 20}),
 
     html.Div([  # Holds the heatmap & barchart (60:40 split) 
         html.Div([  # Holds the heatmap
             dcc.Graph(
                 id="heatmap",
             ),
-            # Add a source annotation and a note for the downsampling
-            html.Div(
-                'Source: https://data.gov.uk/dataset/road-accidents-safety-data',
-                style={
-                    'fontFamily' : FONT_FAMILY,
-                    'fontSize' : 8,
-                    'fontStyle' : 'italic'
-                }),
-            html.Div(
-                'Note: serious and slight accidents were downsampled to allow for speedier map plotting. Other charts are unaffected.',
-                style={
-                    'fontFamily' : FONT_FAMILY,
-                    'fontSize' : 8,
-                    'fontStyle' : 'italic'
-                }
-            )
         ],
         style={
             "width" : '60%', 
@@ -206,7 +199,24 @@ app.layout = html.Div([
             'boxSizing' : 'border-box'
             })
 
-    ])
+    ]),
+    html.Div([
+        # Add a source annotation and a note for the downsampling
+        html.Div(
+            'Source: https://data.gov.uk/dataset/road-accidents-safety-data',
+            style={
+                'fontFamily' : FONT_FAMILY,
+                'fontSize' : 8,
+                'fontStyle' : 'italic'
+            }),
+        html.Div(
+            'Note: Serious and slight accidents were downsampled to allow for speedier map plotting. Other charts are unaffected.',
+            style={
+                'fontFamily' : FONT_FAMILY,
+                'fontSize' : 8,
+                'fontStyle' : 'italic'
+            }
+        )])
 ])
 
 ## APP INTERACTIVITY THROUGH CALLBACK FUNCTIONS TO UPDATE THE CHARTS ##
