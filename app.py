@@ -475,6 +475,6 @@ def updateMapBox(severity, weekdays, time):
 
 # Run the Dash app
 if __name__ == '__main__':
-    app.server.run(debug=True, threaded=True)
+    app.server.run(debug=False, threaded=True)
 
 
